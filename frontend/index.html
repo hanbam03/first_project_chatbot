@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음악 추천 챗봇</title>
+    <style>
+        #chat-section {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+        }
+        
+        #message {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .user-message {
+            background-color: #e0f7fa;
+            align-self: flex-end;
+            padding: 8px 12px;
+            border-radius: 18px 18px 0 18px;
+            max-width: 70%;
+        }
+
+        .bot-message {
+            background-color: #ffffff;
+            align-self: flex-start;
+            padding: 8px 12px;
+            border-radius: 18px 18px 18px 0;
+            max-width: 70%;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="login-section">
+        <h1>음악 추천 챗봇</h1>
+        <h2>로그인</h2>
+        <input type="text" id="username" placeholder="아이디">
+        <input type="password" id="password" placeholder="비밀번호">
+        <button id="register-btn">회원가입</button>
+        <button id="login-btn">로그인</button>
+    </div>
+    <div id="chat-section" style="display: none;">
+        <button id="history-btn">채팅 기록 보기</button>  <!-- 추가 -->
+        <div id="message"></div>
+        <input type="text" id="message-input" placeholder="키워드, 아티스트를 입력해보세요">
+        <button id="send-button">전송</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
