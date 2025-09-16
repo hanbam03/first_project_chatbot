@@ -137,28 +137,36 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         });
-    } else {
-        console.log("전송 버튼을 찾을 수 없음");
     }
-    // 채팅 기록 보기 버튼 (전송 버튼 코드 다음에 추가)
-const historyBtn = document.getElementById("history-btn");
-if (historyBtn) {
-    historyBtn.addEventListener("click", async function() {
-        try {
-            const response = await fetch(`http://localhost:8000/chats/history/${userId}`);
-            const data = await response.json();
-            
-            // 간단하게 alert으로 표시
-            let historyText = "=== 채팅 기록 ===\n";
-            data.history.forEach(chat => {
-                historyText += `사용자: ${chat.user_message}\n`;
-                historyText += `챗봇: ${chat.bot_response}\n\n`;
-            });
-            
-            alert(historyText || "채팅 기록이 없습니다.");
-        } catch (error) {
-            alert("채팅 기록을 불러오는데 실패했습니다.");
-        }
-    });
-}
-});
+
+    // Enter 키 이벤트 추가
+    if (messageInput) {
+        messageInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendBtn.click();
+            }
+        });
+    }
+
+    // 채팅 기록 보기 버튼
+    const historyBtn = document.getElementById("history-btn");
+    if (historyBtn) {
+        historyBtn.addEventListener("click", async function() {
+            try {
+                const response = await fetch(`http://localhost:8000/chats/history/${userId}`);
+                const data = await response.json();
+                
+                let historyText = "=== 채팅 기록 ===\n";
+                data.history.forEach(chat => {
+                    historyText += `사용자: ${chat.user_message}\n`;
+                    historyText += `챗봇: ${chat.bot_response}\n\n`;
+                });
+                
+                alert(historyText || "채팅 기록이 없습니다.");
+            } catch (error) {
+                alert("채팅 기록을 불러오는데 실패했습니다.");
+            }
+        });
+    }
+
+}); // 전체 DOMContentLoaded 끝
