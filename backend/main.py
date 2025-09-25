@@ -3,6 +3,7 @@ import json
 from fastapi import FastAPI, Form, HTTPException, Request
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from models import User_Info, Sign_Up_Success, User_Login, User_Chat, Bot_Chat, Chat_History
 import requests
 
@@ -14,9 +15,7 @@ BOOTHCAMP_API_URL = "https://dev.wenivops.co.kr/services/openai-api"
 origins = [
     "http://localhost",
     "http://127.0.0.1",
-    "http://127.0.0.1:8000",
-    # 프론트엔드 포트 번호
-    "http://127.0.0.1:5500"
+    "http://127.0.0.1:8000"
 ]
 
 # CORS 미들웨어 추가
@@ -143,3 +142,6 @@ def chat(user_chat: User_Chat):
     
     # 응답 반환
     return chat_logs
+
+
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
